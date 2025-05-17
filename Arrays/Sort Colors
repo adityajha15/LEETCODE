@@ -1,0 +1,38 @@
+class Solution {
+    public void sortColors(int[] nums) {
+      int n=nums.length;
+      quick(nums,0,nums.length-1);
+    }
+    public void quick(int nums[],int lower,int upper)
+    {
+        if(lower<upper)
+        {
+            int left=lower+1;
+            int right=upper;
+            int pivot=lower;
+            while(left<=right)
+            {
+                while(left<=right && nums[left]<=nums[pivot])
+                {
+                    left++;
+                }
+                while(left<=right && nums[right]>nums[pivot])
+                {
+                    right--;
+                }
+                if(left<right)
+                {
+                    int temp=nums[left];
+                    nums[left]=nums[right];
+                    nums[right]=temp;
+                }
+            }
+            int t=nums[pivot];
+            nums[pivot]=nums[right];
+            nums[right]=t;
+            pivot=right;
+            quick(nums,lower,pivot-1);
+            quick(nums,pivot+1,upper);
+        }
+    }
+}
