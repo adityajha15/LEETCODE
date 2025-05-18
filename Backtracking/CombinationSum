@@ -1,0 +1,27 @@
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+      List<List<Integer>> reslist=new ArrayList<>();
+      List<Integer> templist=new ArrayList<>();
+      combSum(candidates,0,templist,reslist,target);
+      return reslist;
+    }
+    public void combSum(int candidates[],int i,List<Integer> templist,List<List<Integer>> reslist,int target)
+    {
+        if(target==0)
+        {
+            reslist.add(new ArrayList<>(templist));
+            return;
+        }
+        if(i==candidates.length || target<0)
+        {
+            return;
+        }
+        templist.add(candidates[i]);
+        //multiple inclusion
+        combSum(candidates,i,templist,reslist,target-candidates[i]);
+        //backtracking
+        templist.remove(templist.size()-1);
+        //exclude
+        combSum(candidates,i+1,templist,reslist,target);
+    }    
+}
