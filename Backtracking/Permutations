@@ -2,10 +2,10 @@ class Solution {
     public List<List<Integer>> permute(int[] nums) {
       List<List<Integer>> reslist=new ArrayList<>();
       List<Integer> templist=new ArrayList<>();
-      permutation(reslist,templist,nums);
+      getPer(nums,reslist,templist);
       return reslist;
     }
-    public void permutation(List<List<Integer>> reslist,List<Integer> templist,int nums[])
+    public void getPer(int nums[],List<List<Integer>> reslist,List<Integer> templist)
     {
         if(templist.size()==nums.length)
         {
@@ -19,7 +19,8 @@ class Solution {
                 continue;
             }
             templist.add(i);
-            permutation(reslist,templist,nums);
+            getPer(nums,reslist,templist);
+            //backtracking
             templist.remove(templist.size()-1);
         }
     }
