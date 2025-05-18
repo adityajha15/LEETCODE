@@ -1,0 +1,78 @@
+class Solution {
+    public List<List<String>> solveNQueens(int n) {
+     List<List<String>> reslist=new ArrayList<>();
+     char board[][]=new char[n][n];
+     for(int i=0;i<n;i++)
+     {
+        for(int j=0;j<n;j++)
+        {
+            board[i][j]='.';
+        }
+     }
+     nQueens(board,n,0,reslist);
+     return reslist;
+    }
+    public void nQueens(char board[][],int n,int row,List<List<String>> reslist)
+    {
+        if(row==board.length)
+        {
+            reslist.add(construct(board));
+            return;
+        }
+        for(int j=0;j<board.length;j++)
+        {
+            if(isSafe(board,row,j,n))
+            {
+                board[row][j]='Q';
+                nQueens(board,n,row+1,reslist);
+                board[row][j]='.';
+            }
+        }
+    }
+    public List<String> construct(char board[][])
+    {
+        List<String> templist=new ArrayList<>();
+        for(int i=0;i<board.length;i++)
+        {
+            String r=new String(board[i]);
+            templist.add(r);
+        }
+        return templist;
+    }
+    public boolean isSafe(char board[][],int row,int col,int n)
+    {
+        //Horizontal check
+        for(int j=0;j<n;j++)
+        {
+            if(board[row][j]=='Q')
+            {
+                return false;
+            }
+        }
+        //vertical check
+        for(int i=0;i<n;i++)
+        {
+            if(board[i][col]=='Q')
+            {
+                return false;
+            }
+        }
+        //left diagonal
+        for(int i=row,j=col;i>=0 && j>=0;i--,j--)
+        {
+            if(board[i][j]=='Q')
+            {
+                return false;
+            }
+        }
+        //right diagonal
+        for(int i=row,j=col;i>=0 && j<n;i--,j++)
+        {
+            if(board[i][j]=='Q')
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
