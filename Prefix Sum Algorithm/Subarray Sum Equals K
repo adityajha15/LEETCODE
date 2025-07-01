@@ -1,0 +1,28 @@
+//optimized approach
+class Solution {
+    public int subarraySum(int[] nums, int k) {
+      int n=nums.length;
+      int count=0;
+      int ps[]=new int[n];
+      ps[0]=nums[0];
+      for(int i=1;i<n;i++)
+      {
+        ps[i]=ps[i-1]+nums[i];
+      }
+      Map<Integer,Integer> mp=new HashMap<>();
+      for(int j=0;j<n;j++)
+      {
+        if(ps[j]==k)
+        {
+            count++;
+        }
+        int val=ps[j]-k;
+        if(mp.containsKey(val))
+        {
+            count+=mp.get(val);
+        }
+        mp.put(ps[j],mp.getOrDefault(ps[j],0)+1);
+      }
+      return count;
+    }
+}
