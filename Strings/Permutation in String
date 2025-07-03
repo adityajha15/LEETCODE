@@ -1,0 +1,26 @@
+//brute-force approach
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+      int count[]=new int[26];
+      for(char ch:s1.toCharArray())
+      {
+        count[ch-'a']++;
+      }
+      for(int i=0;i<s2.length();i++)
+      {
+        int freq[]=new int[26];
+        int windIdx=0,idx=i;
+        while(windIdx<s1.length() && idx<s2.length())
+        {
+            freq[s2.charAt(idx)-'a']++;
+            windIdx++;
+            idx++;
+        }
+        if(Arrays.equals(count,freq))
+        {
+            return true;
+        }
+      }
+      return false;
+    }
+}
