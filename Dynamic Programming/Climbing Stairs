@@ -1,6 +1,6 @@
 class Solution {
     public int climbStairs(int n) {
-        //top down approach
+        //bottom up approach
         if(n<=2)
         {
             return n;
