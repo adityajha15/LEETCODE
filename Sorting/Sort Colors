@@ -1,0 +1,37 @@
+class Solution {
+    public void sortColors(int[] nums) {
+      quicksort(nums,0,nums.length-1);
+    }
+    public void quicksort(int nums[],int lower,int upper)
+    {
+        if(lower<upper)
+        {
+            int pivot=lower;
+            int left=lower+1;
+            int right=upper;
+            while(left<=right)
+            {
+                while(left<=right && nums[left]<=nums[pivot])
+                {
+                    left++;
+                }
+                while(left<=right && nums[right]>nums[pivot])
+                {
+                    right--;
+                }
+                if(left<right)
+                {
+                    int temp=nums[left];
+                    nums[left]=nums[right];
+                    nums[right]=temp;
+                }
+            }
+            int t=nums[pivot];
+            nums[pivot]=nums[right];
+            nums[right]=t;
+            pivot=right;
+            quicksort(nums,lower,pivot-1);
+            quicksort(nums,pivot+1,upper);
+        }
+    }
+}
